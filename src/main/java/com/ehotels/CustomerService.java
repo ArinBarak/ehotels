@@ -63,8 +63,13 @@ public class CustomerService {
         }
     }
 
-
-
+    /**
+     * Method for creating a customer to database
+     *
+     * @param customer
+     * @return
+     * @throws Exception
+     */
     public String createCustomer(Customer customer) throws Exception {
         String message = "";
         Connection con = null;
@@ -117,7 +122,7 @@ public class CustomerService {
     }
 
     /**
-     * //Method to check in a customer (employees will use this function)
+     * Method to check in a customer (employees will use this function)
      *
      * @param customer
      * @return

@@ -111,7 +111,7 @@ public class BookingService {
         // return respective message
         return message;
     }
-
+/*
     /**
      * Method to update student
      *
