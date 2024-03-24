@@ -2,9 +2,9 @@ package com.ehotels;
 
 public class Booking {
 
-    private Integer booking_number;
-    private Integer room_id;
-    private Integer customer_id;
+    private Integer booking_number; //key
+    private Integer room_id; //key
+    private Integer customer_id; //key
 
     /**
      * Constructor for Bookings

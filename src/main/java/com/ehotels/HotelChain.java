@@ -1,7 +1,7 @@
 package com.ehotels;
 
 public class HotelChain{
-    private String chain_name;
+    private String chain_name; //key
     private String address_of_central;
     private Integer num_of_hotels;
     private String email;

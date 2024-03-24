@@ -22,7 +22,7 @@ public class Employee {
 
     public Employee(Integer employee_id, String full_name, String address,
                     String role_title, Integer role_salary, String hotel_id){
-        this.employee_id=employee_id;
+        this.employee_id=employee_id; //key
         this.full_name=full_name;
         this.address=address;
         this.role_title=role_title;

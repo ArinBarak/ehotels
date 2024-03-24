@@ -22,7 +22,7 @@ public class Hotel {
      */
     public Hotel(String hotel_id, String chain_name, Integer num_of_rooms,
                  String email, String phone_number, Integer rating){
-        this.hotel_id=hotel_id;
+        this.hotel_id=hotel_id; //key
         this.chain_name=chain_name;
         this.num_of_rooms=num_of_rooms;
         this.email=email;
