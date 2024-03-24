@@ -32,8 +32,8 @@ public class EmployeeService {
 
             // iterate through the result set
             while (rs.next()) {
-                if (e_id==rs.getInt("employee_id"){
-                    result true;
+                if (e_id==rs.getInt("employee_id")){
+                    result = true;
                     break;
                 }
             }
