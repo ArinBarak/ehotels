@@ -38,7 +38,70 @@ public class RoomService {
                 if(!rs.getBoolean("isbooked")) {
 
                     Room room = new Room(
-                            rs.getInt("room_id"),
+                            rs.getString("room_id"),
+                            rs.getInt("room_number"),
+                            rs.getString("hotel_name"),
+                            rs.getInt("price"),
+                            rs.getString("capacity"),
+                            rs.getString("amenities"),
+                            rs.getString("damage"),
+                            rs.getString("view"),
+                            rs.getBoolean("extension"),
+                            rs.getBoolean("isbooked")
+                    );
+                    // append room in rooms list
+                    rooms.add(room);
+                }
+            }
+
+            // close result set
+            rs.close();
+            // close statement
+            stmt.close();
+            con.close();
+            db.close();
+
+            // return result
+            return rooms;
+        } catch (Exception e) {
+            throw new Exception(e.getMessage());
+        }
+    }
+
+    /**
+     * method to get rooms by search
+     * @param location
+     * @return
+     * @throws Exception
+     */
+    public List<Room> getSearchedRooms(String location, String capacity) throws Exception {
+
+        // sql query
+        String sql = "SELECT * FROM room";
+        // connection object
+        ConnectionDB db = new ConnectionDB();
+
+        // data structure to keep all available rooms retrieved from database
+        List<Room> rooms = new ArrayList<Room>();
+        HotelService hs = new HotelService();
+        List<String> hotelsInLoc = hs.getHotelsByLocation(location);
+
+        // try connect to database, catch any exceptions
+        try (Connection con = db.getConnection()) {
+            // prepare statement
+            PreparedStatement stmt = con.prepareStatement(sql);
+
+            // get the results from executing the query
+            ResultSet rs = stmt.executeQuery();
+
+            // iterate through the result set
+            while (rs.next()) {
+                // create new student object
+                if(hotelsInLoc.contains(rs.getString("hotel_name")) &&
+                        capacity==(rs.getString("capacity"))) {
+
+                    Room room = new Room(
+                            rs.getString("room_id"),
                             rs.getInt("room_number"),
                             rs.getString("hotel_name"),
                             rs.getInt("price"),
@@ -71,11 +134,11 @@ public class RoomService {
     /**
      * Method for booking the room by updating the "isbooked" variable of the room
      *
-     * @param room
+     * @param room_id
      * @return
      * @throws Exception
      */
-    public String bookRoom(Room room) throws Exception {
+    public String bookRoom(String room_id) throws Exception {
         Connection con = null;
         String message = "";
 
@@ -95,7 +158,7 @@ public class RoomService {
 
             // set every ? of statement
             stmt.setBoolean(1, true);
-            stmt.setInt(2, room.getRoom_id());
+            stmt.setString(2, room_id);
 
             // execute the query
             stmt.executeUpdate();

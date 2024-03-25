@@ -41,7 +41,7 @@ public class CustomerService {
                         rs.getString("address"),
                         rs.getString("id_type"),
                         rs.getString("registration_date"),
-                        rs.getInt("room_number"),
+                        rs.getString( "room_number"),
                         rs.getBoolean("isCheckedIn")
                 );
                 // append room in rooms list
@@ -97,7 +97,7 @@ public class CustomerService {
             stmt.setString(3, customer.getAddress());
             stmt.setString(4, customer.getId_type());
             stmt.setString(5, customer.getRegistration_date());
-            stmt.setInt(6, customer.getRoom_number());
+            stmt.setString(6, customer.getRoom_number());
             stmt.setBoolean(7, customer.getCheckedIn());
 
             // execute the query

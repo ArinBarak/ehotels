@@ -1,7 +1,7 @@
 package com.ehotels;
 
 public class Room {
-    private Integer room_id; //primary key
+    private String room_id; //primary key
     private Integer room_number;
     private String hotel_name;
     private Integer price;
@@ -27,7 +27,7 @@ public class Room {
      * @param extension
      * @param isbooked
      */
-    public Room(Integer room_id, Integer room_number,String hotel_name, Integer price, String capacity,
+    public Room(String room_id, Integer room_number,String hotel_name, Integer price, String capacity,
                 String amenities, String damage, String view, Boolean extension, Boolean isbooked){
         this.room_id=room_id;
         this.room_number=room_number;
@@ -42,7 +42,7 @@ public class Room {
     }
 
     //setters
-    public void setRoom_id(Integer room_id) { this.room_id = room_id; }
+    public void setRoom_id(String room_id) { this.room_id = room_id; }
     public void setRoom_number(Integer room_number) { this.room_number = room_number; }
     public void setHotel_name(String hotel_name) { this.hotel_name = hotel_name; }
     public void setPrice(Integer price) { this.price = price; }
@@ -54,7 +54,7 @@ public class Room {
     public void setIsbooked(Boolean isbooked) { this.isbooked = isbooked; }
 
     //getters
-    public Integer getRoom_id() { return room_id; }
+    public String getRoom_id() { return room_id; }
     public Integer getRoom_number() { return room_number; }
     public String getHotel_name() { return hotel_name; }
     public Integer getPrice() { return price; }

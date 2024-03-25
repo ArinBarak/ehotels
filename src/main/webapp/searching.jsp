@@ -6,28 +6,35 @@
 <%@ page import="com.demo.Message" %>
 <%@ page import="java.util.ArrayList" %>
 
-<%
-       // get all available rooms from database
-       RoomService roomService = new RoomService();
-       List<Rooms> rooms = null;
-       try {
-           rooms = roomService.getRooms();
-       } catch (Exception e) {
-           e.printStackTrace();
-       }
-%>
-
-
 <!DOCTYPE html>
 <html>
 <head>
-    <title>EHotels | Books</title>
+    <title>EHotels | Search</title>
 
 </head>
 
 <body>
     <jsp:include page="main.jsp"/>
 
+    <div class="container">
+        <div class="row" id="row">
+            <div class="col-md-12">
+                <form class="form-horizontal" name="searching" action="searching-results.jsp" method="POST">
+                    <div class="form-group col-sm-6">
+                        <label for="location">Location</label>
+                        <input type="text" class="form-control" name="location" placeholder="Location">
+                    </div>
+                    <div class="form-group col-sm-6">
+                        <label for="capacity">Capacity</label>
+                        <input type="text" class="form-control" name="capacity" placeholder="Choose Room Capacity">
+                    </div>
+                    <div class="form-group col-sm-12">
+                        <button type="submit" class="btn btn-primary btn-submit-custom">Search</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
 
 </body>
 
