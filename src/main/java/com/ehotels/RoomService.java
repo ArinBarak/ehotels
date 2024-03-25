@@ -8,7 +8,13 @@ import java.util.List;
 
 public class RoomService {
 
-    public List<Room> getRooms() throws Exception {
+    /**
+     * Method to get all room (not filtered by their availability
+     *
+     * @return
+     * @throws Exception
+     */
+    public List<Room> getAllRooms() throws Exception {
 
         // sql query
         String sql = "SELECT * FROM room";
@@ -69,7 +75,7 @@ public class RoomService {
      * @return
      * @throws Exception
      */
-    public String updateRoom(Room room) throws Exception {
+    public String bookRoom(Room room) throws Exception {
         Connection con = null;
         String message = "";
 
