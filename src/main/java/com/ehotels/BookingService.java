@@ -36,7 +36,7 @@ public class BookingService {
             while (rs.next()) {
                 // create new booking object
                 Booking booking = new Booking(
-                        rs.getInt("booking_number"),
+                        rs.getString("booking_ref"),
                         rs.getInt("room_id"),
                         rs.getInt("customer_id")
                 );
@@ -62,7 +62,7 @@ public class BookingService {
     /**
      * Method to create a booking in the database
      *
-     * @param booking student to be created
+     * @param booking booking to be created
      * @return string returned that states if the booking created or not
      * @throws Exception when trying to connect to database
      */
@@ -72,7 +72,7 @@ public class BookingService {
 
         // connection object
         ConnectionDB db = new ConnectionDB();
-        System.out.println(booking.getBooking_number());
+        System.out.println(booking.getBooking_ref());
         System.out.println(booking.getRoom_id());
         System.out.println(booking.getCustomer_id());
 
@@ -87,7 +87,7 @@ public class BookingService {
             PreparedStatement stmt = con.prepareStatement(insertBookingQuery);
 
             // set every ? of statement
-            stmt.setInt(1, booking.getBooking_number());
+            stmt.setString(1, booking.getBooking_ref());
             stmt.setInt(2, booking.getRoom_id());
             stmt.setInt(3, booking.getCustomer_id());
 
@@ -111,55 +111,4 @@ public class BookingService {
         // return respective message
         return message;
     }
-/*
-    /**
-     * Method to update student
-     *
-     * @param student student to be updated
-     * @return string returned that states if the grade deleted or not
-     * @throws Exception when trying to connect to database
-     *//*
-    public String updateStudent(Student student) throws Exception {
-        Connection con = null;
-        String message = "";
-
-        // sql query
-        String sql = "UPDATE students SET name=?, surname=?, email=? WHERE id=?;";
-//        "UPDATE students SET name=" + student.getName().toString() +", surname=" +
-
-        // connection object
-        ConnectionDB db = new ConnectionDB();
-
-        // try connect to database, catch any exceptions
-        try {
-            // get connection
-            con = db.getConnection();
-
-            // prepare the statement
-            PreparedStatement stmt = con.prepareStatement(sql);
-
-            // set every ? of statement
-            stmt.setString(1, student.getName());
-            stmt.setString(2, student.getSurname());
-            stmt.setString(3, student.getEmail());
-            stmt.setInt(4, student.getId());
-
-            // execute the query
-            stmt.executeUpdate();
-
-            // close the statement
-            stmt.close();
-
-        } catch (Exception e) {
-            message = "Error while updating student: " + e.getMessage();
-
-        } finally {
-            if (con != null) con.close();
-            if (message.equals("")) message = "Student successfully updated!";
-        }
-
-        // return respective message
-        return message;
-    }
-*/
 }
