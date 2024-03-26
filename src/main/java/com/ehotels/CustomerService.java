@@ -124,13 +124,15 @@ public class CustomerService {
     /**
      * Method to check in a customer (employees will use this function)
      *
-     * @param customer
+     * @param customer_id
      * @return
      * @throws Exception
      */
-    public String checkInCustomer(Customer customer) throws Exception {
+    public Boolean checkInCustomer(Integer customer_id) throws Exception {
         Connection con = null;
         String message = "";
+
+        Boolean result;
 
         // sql query
         String sql = "UPDATE customer SET isCheckedIn=? WHERE id=?;";
@@ -148,23 +150,30 @@ public class CustomerService {
 
             // set every ? of statement
             stmt.setBoolean(1, true);
-            stmt.setInt(2, customer.getId());
+            stmt.setInt(2, customer_id);
 
             // execute the query
             stmt.executeUpdate();
+            result = true;
 
             // close the statement
             stmt.close();
 
         } catch (Exception e) {
+            result = false;
             message = "Error while updating student: " + e.getMessage();
 
         } finally {
             if (con != null) con.close();
-            if (message.equals("")) message = "Customer checked in successfully!";
+            if (message.equals("")) {
+                result = true;
+                message = "Customer checked in successfully!";
+            }
         }
 
         // return respective message
-        return message;
+        return result;
     }
+
+
 }

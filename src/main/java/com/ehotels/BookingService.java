@@ -111,4 +111,98 @@ public class BookingService {
         // return respective message
         return message;
     }
+
+    /**
+     * Method for employees to check if the booking_ref entered is an existing booking
+     *
+     * @param booking_ref
+     * @return
+     * @throws Exception
+     */
+    public Boolean foundBooking(String booking_ref) throws Exception {
+
+        Boolean result = false;
+
+        // sql query
+        String sql = "SELECT * FROM booking";
+        // connection object
+        ConnectionDB db = new ConnectionDB();
+
+        // try connect to database, catch any exceptions
+        try (Connection con = db.getConnection()) {
+            // prepare statement
+            PreparedStatement stmt = con.prepareStatement(sql);
+
+            // get the results from executing the query
+            ResultSet rs = stmt.executeQuery();
+
+            // iterate through the result set
+            while (rs.next()) {
+                if (booking_ref==rs.getString("booking_ref")){
+                    result = true;
+                    break;
+                }
+            }
+
+
+            // close result set
+            rs.close();
+            // close statement
+            stmt.close();
+            con.close();
+            db.close();
+
+            // return result
+            return result;
+        } catch (Exception e) {
+            throw new Exception(e.getMessage());
+        }
+    }
+
+    /**
+     * Method toget the customers id by their booking
+     *
+     * @param booking_ref
+     * @return
+     * @throws Exception
+     */
+    public Integer getCustomerIdFromBooking(String booking_ref) throws Exception {
+
+        Integer cust_id = 0;
+
+        // sql query
+        String sql = "SELECT * FROM booking";
+        // connection object
+        ConnectionDB db = new ConnectionDB();
+
+        // try connect to database, catch any exceptions
+        try (Connection con = db.getConnection()) {
+            // prepare statement
+            PreparedStatement stmt = con.prepareStatement(sql);
+
+            // get the results from executing the query
+            ResultSet rs = stmt.executeQuery();
+
+            // iterate through the result set
+            while (rs.next()) {
+                if (booking_ref==rs.getString("booking_ref")){
+                    cust_id = rs.getInt("customer_id");
+                    break;
+                }
+            }
+
+
+            // close result set
+            rs.close();
+            // close statement
+            stmt.close();
+            con.close();
+            db.close();
+
+            // return result
+            return cust_id;
+        } catch (Exception e) {
+            throw new Exception(e.getMessage());
+        }
+    }
 }

@@ -25,8 +25,10 @@
 <head>
     <meta charset="UTF-8">
     <title>List of Rooms</title>
+
 </head>
 <body>
+    <jsp:include page="main.jsp"/>
     <h2>List of Rooms</h2>
     <div>
         <%
