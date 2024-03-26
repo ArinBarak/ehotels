@@ -9,7 +9,7 @@ import java.util.List;
 public class HotelService {
 
     /**
-     * method to get hotels by location
+     * Method to get hotels by location
      *
      * @param location
      * @return
@@ -35,19 +35,9 @@ public class HotelService {
 
             // iterate through the result set
             while (rs.next()) {
-                // create new student object
+
                 if(location == rs.getString("address")) {
-/*
-                    Hotel hotel = new Hotel(
-                            rs.getString("hotel_id"),
-                            rs.getString("chain_name"),
-                            rs.getString("address"),
-                            rs.getInt("num_of_rooms"),
-                            rs.getString("email"),
-                            rs.getString("phone_number"),
-                            rs.getInt("rating")
-                    );*/
-                    // append room in rooms list
+                    // append hotel_id in hotels list
                     hotels.add(rs.getString("hotel_id"));
                 }
             }

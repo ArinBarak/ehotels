@@ -9,7 +9,7 @@ import java.util.List;
 public class RoomService {
 
     /**
-     * Method to get all room (not filtered by their availability
+     * Method to get all available rooms
      *
      * @return
      * @throws Exception
@@ -34,7 +34,7 @@ public class RoomService {
 
             // iterate through the result set
             while (rs.next()) {
-                // create new student object
+                // create new room object
                 if(!rs.getBoolean("isbooked")) {
 
                     Room room = new Room(
@@ -81,7 +81,7 @@ public class RoomService {
         // connection object
         ConnectionDB db = new ConnectionDB();
 
-        // data structure to keep all available rooms retrieved from database
+        // data structure to keep all searched rooms retrieved from database
         List<Room> rooms = new ArrayList<Room>();
         HotelService hs = new HotelService();
         List<String> hotelsInLoc = hs.getHotelsByLocation(location);
@@ -96,7 +96,7 @@ public class RoomService {
 
             // iterate through the result set
             while (rs.next()) {
-                // create new student object
+
                 if(hotelsInLoc.contains(rs.getString("hotel_name")) &&
                         capacity==(rs.getString("capacity"))) {
 

@@ -60,7 +60,7 @@ public class BookingService {
 
 
     /**
-     * Method to create a booking in the database
+     * Method to create a booking and insert a booking into the database
      *
      * @param booking booking to be created
      * @return string returned that states if the booking created or not
@@ -113,7 +113,7 @@ public class BookingService {
     }
 
     /**
-     * Method for employees to check if the booking_ref entered is an existing booking
+     * Method for employees to check if the booking reference is an attribute of an existing booking
      *
      * @param booking_ref
      * @return
@@ -160,7 +160,7 @@ public class BookingService {
     }
 
     /**
-     * Method toget the customers id by their booking
+     * Method to get the customers id by their booking
      *
      * @param booking_ref
      * @return

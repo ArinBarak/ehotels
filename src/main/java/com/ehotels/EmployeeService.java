@@ -7,7 +7,7 @@ import java.sql.ResultSet;
 public class EmployeeService {
 
     /**
-     *Method to check if the employee id appears in employee
+     *Method to check if the employee id appears in employee table
      *
      * @param e_id
      * @return

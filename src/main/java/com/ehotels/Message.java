@@ -3,6 +3,9 @@ package com.ehotels;
 /**
  * Message class to save the type and the value of a message
  * used to pass messages to the pages and show them to the user
+ *
+ *
+ * never used it though
  */
 public class Message {
     public String type;

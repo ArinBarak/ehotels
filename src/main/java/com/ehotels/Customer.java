@@ -11,7 +11,7 @@ public class Customer {
     private Boolean isCheckedIn;
 
     /**
-     * Constructor to save Customer's data
+     * Constructor to create Customer
      *
      * @param id identification of customer
      * @param fullname name and surname of customer

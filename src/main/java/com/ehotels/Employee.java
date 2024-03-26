@@ -19,7 +19,6 @@ public class Employee {
      * @param role_salary
      * @param hotel_id
      */
-
     public Employee(Integer employee_id, String full_name, String address,
                     String role_title, Integer role_salary, String hotel_id){
         this.employee_id=employee_id; //key

@@ -34,7 +34,7 @@ public class CustomerService {
 
             // iterate through the result set
             while (rs.next()) {
-                // create new booking object
+                // create new customer object
                 Customer customer = new Customer(
                         rs.getInt("id"),
                         rs.getString("fullname"),
@@ -44,7 +44,7 @@ public class CustomerService {
                         rs.getString( "room_number"),
                         rs.getBoolean("isCheckedIn")
                 );
-                // append room in rooms list
+                // append customer in customers list
                 customers.add(customer);
             }
 
@@ -64,7 +64,7 @@ public class CustomerService {
     }
 
     /**
-     * Method for creating a customer to database
+     * Method for inserting a customer to database
      *
      * @param customer
      * @return
@@ -122,7 +122,7 @@ public class CustomerService {
     }
 
     /**
-     * Method to check in a customer (employees will use this function)
+     * Method to check in a customer (only employees will use this function)
      *
      * @param customer_id
      * @return
