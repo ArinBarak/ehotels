@@ -1,10 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 
 <%@ page import="java.util.List" %>
-<%@ page import="com.demo.Customer" %>
-<%@ page import="com.demo.CustomerService" %>
+<%@ page import="com.ehotels.Customer" %>
+<%@ page import="com.ehotels.CustomerService" %>
 
-<%@ page import="com.demo.Message" %>
+<%@ page import="com.ehotels.Message" %>
 <%@ page import="java.util.ArrayList" %>
 
 <%
@@ -24,7 +24,7 @@
         response.sendRedirect("success.jsp");
     }
     else{
-        response.redirect("not-found.jsp");
+        response.sendRedirect("not-found.jsp");
     }
 
 %>

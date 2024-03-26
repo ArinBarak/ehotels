@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 
+<%-- this is the main page of ehotels --%>
+
 <html lang="en">
 <head>
     <meta charset="UTF-8">

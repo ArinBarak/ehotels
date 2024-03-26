@@ -1,5 +1,5 @@
 <html>
 <body>
-<h2>Hello World!</h2>
+<jsp:include page="main.jsp"/>
 </body>
 </html>
