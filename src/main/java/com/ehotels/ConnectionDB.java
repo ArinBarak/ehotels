@@ -7,11 +7,11 @@ import java.sql.SQLException;
 public class ConnectionDB {
 
     /* Database connection settings, change dbName, dbusername, dbpassword */
-    private final String ipAddress = "127.0.0.1";
+    private final String ipAddress = "localhost";
     private final String dbServerPort = "5432";
-    private final String dbName = "mydb";
-    private final String dbusername = "user1";
-    private final String dbpassword = "password";
+    private final String dbName = "eHotels";
+    private final String dbusername = "postgres";
+    private final String dbpassword = "2132";
 
 
     private Connection con = null;

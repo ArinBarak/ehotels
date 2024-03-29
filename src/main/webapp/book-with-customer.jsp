@@ -11,30 +11,40 @@
 
 <%
     //get values
+    Boolean done= false;
+    Boolean done1 = false;
+    Boolean done2 = false;
     String id = request.getParameter("cust_id");
+    Integer customer_id = Integer.parseInt(id);
     String fullname = request.getParameter("fullname");
     String address = request.getParameter("address");
     String id_type = request.getParameter("id_type");
-    String registration_date = request.getParameter("registration_date");
     String room_id = request.getParameter("room_id");
+    String room_number = request.getParameter("room_number");
 
     BookingService bookingservice = new BookingService();
     RoomService roomservice = new RoomService();
     CustomerService customerservice = new CustomerService();
-    Customer customer = new Customer(id, fullname, address, id_type, registration_date, room_id, false);
+    Customer customer = new Customer(customer_id, fullname, address, id_type, room_id, 0);
 
-    String reference = id+"-"+room_id+"-"+fullname;
-    Booking booking = new Booking(reference, room_id, id);
+    String reference = id+room_number;
+    Integer booking_ref = Integer.valueOf(reference);
+    Integer r_num = Integer.parseInt(room_number);
+    Booking booking = new Booking(booking_ref, room_id, customer_id, r_num);
+    done = customerservice.createCustomer(customer);
+    done1 = roomservice.bookRoom(room_id);
+    done2= bookingservice.createBooking(booking);
 
-    try{
-        String value = customerservice.createCustomer(customer);
-        String value2 = roomservice.bookRoom(room_id);
-        String value3 = bookingservice.createBooking(booking);
-
+    /*try{
+        null;
     }catch (Exception e) {
              e.printStackTrace();
-    }
+    }*/
 
-    response.sendRedirect("success.jsp");
+    if(done2){
+        response.sendRedirect("success.jsp");
+    }else{
+        response.sendRedirect("not-found.jsp");
+    }
 
 %>

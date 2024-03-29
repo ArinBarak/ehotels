@@ -1,7 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 
-<%--
-
 <%@ page import="java.util.List" %>
 <%@ page import="com.ehotels.RoomService" %>
 <%@ page import="com.ehotels.Room" %>
@@ -21,7 +19,7 @@
     <div class="container">
         <div class="row" id="row">
             <div class="col-md-12">
-                <form class="form-horizontal" name="searching" action="searching-results.jsp" method="POST">
+                <form class="form-horizontal" name="searching" action="searching_results.jsp" method="POST">
                     <div class="form-group col-sm-6">
                         <label for="location">Location</label>
                         <input type="text" class="form-control" name="location" placeholder="Location">

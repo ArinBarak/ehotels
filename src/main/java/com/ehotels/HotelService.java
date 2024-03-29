@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
+import java.sql.SQLException;
 
 public class HotelService {
 
@@ -15,31 +16,30 @@ public class HotelService {
      * @return
      * @throws Exception
      */
-    public List<String> getHotelsByLocation(String location) throws Exception {
+    public List<Integer> getHotelsByLocation(String location) throws Exception {
 
         // sql query
-        String sql = "SELECT * FROM hotel";
+        String sql =  "SELECT * FROM \"eHotels\".hotel WHERE city=?;";
         // connection object
         ConnectionDB db = new ConnectionDB();
 
         // data structure to get hotels by location from database
-        List<String> hotels = new ArrayList<String>();
+        List<Integer> hotels = new ArrayList<Integer>();
 
         // try connect to database, catch any exceptions
         try (Connection con = db.getConnection()) {
             // prepare statement
             PreparedStatement stmt = con.prepareStatement(sql);
+            String selectedcity = "'"+location+"'";
+            stmt.setString(1, location);
 
             // get the results from executing the query
             ResultSet rs = stmt.executeQuery();
 
             // iterate through the result set
             while (rs.next()) {
-
-                if(location == rs.getString("address")) {
-                    // append hotel_id in hotels list
-                    hotels.add(rs.getString("hotel_id"));
-                }
+                // append hotel_id in hotels list
+                hotels.add(rs.getInt("hotel_id"));
             }
 
             // close result set
@@ -56,4 +56,51 @@ public class HotelService {
         }
     }
 
+    public String getHotelNameById(Integer hotel_id) throws Exception {
+
+        // sql query
+        String sql = "SELECT * FROM \"eHotels\".hotel WHERE hotel_id=?";
+        // connection object
+        ConnectionDB db = new ConnectionDB();
+        String result;
+
+        // data structure to get hotels by location from database
+        List<String> hotels = new ArrayList<String>();
+
+        // try connect to database, catch any exceptions
+        try (Connection con = db.getConnection()) {
+            // prepare statement
+            PreparedStatement stmt = con.prepareStatement(sql);
+            stmt.setInt(1, hotel_id);
+
+            // get the results from executing the query
+            ResultSet rs = stmt.executeQuery();
+
+            // iterate through the result set
+            while (rs.next()) {
+                try {
+                    if (hotel_id == rs.getInt("hotel_id")) {
+                        // append hotel_id in hotels list
+                        result = rs.getString("hotel_name");
+                        return result;
+                    }
+                }
+                catch (SQLException e) {
+                    // Handle any SQLExceptions that occur while retrieving data from the ResultSet
+                    // Print error message or log it for debugging
+                    System.err.println("Error while processing ResultSet: " + e.getMessage());
+                }
+            }
+
+            // close result set
+            rs.close();
+            // close statement
+            stmt.close();
+            con.close();
+            db.close();
+            return null;
+        } catch (Exception e) {
+            throw new Exception(e.getMessage());
+        }
+    }
 }

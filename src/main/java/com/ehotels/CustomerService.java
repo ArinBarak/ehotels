@@ -1,5 +1,7 @@
 package com.ehotels;
 
+import java.time.LocalDate;
+import java.sql.*;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -17,12 +19,15 @@ public class CustomerService {
     public List<Customer> getCustomers() throws Exception {
 
         // sql query
-        String sql = "SELECT * FROM customer";
+        String sql = "SELECT * FROM \"eHotels\".customer";
         // connection object
         ConnectionDB db = new ConnectionDB();
 
         // data structure to keep all customers retrieved from database
         List<Customer> customers = new ArrayList<Customer>();
+        LocalDate currentDate = LocalDate.now();
+        java.sql.Date sqlDate = java.sql.Date.valueOf(currentDate);
+
 
         // try connect to database, catch any exceptions
         try (Connection con = db.getConnection()) {
@@ -36,13 +41,12 @@ public class CustomerService {
             while (rs.next()) {
                 // create new customer object
                 Customer customer = new Customer(
-                        rs.getInt("id"),
-                        rs.getString("fullname"),
+                        rs.getInt("customer_id"),
+                        rs.getString("full_name"),
                         rs.getString("address"),
                         rs.getString("id_type"),
-                        rs.getString("registration_date"),
                         rs.getString( "room_number"),
-                        rs.getBoolean("isCheckedIn")
+                        rs.getInt("ischeckedin")
                 );
                 // append customer in customers list
                 customers.add(customer);
@@ -70,8 +74,8 @@ public class CustomerService {
      * @return
      * @throws Exception
      */
-    public String createCustomer(Customer customer) throws Exception {
-        String message = "";
+    public Boolean createCustomer(Customer customer) throws Exception {
+        Boolean result = false;
         Connection con = null;
 
         // connection object
@@ -82,8 +86,10 @@ public class CustomerService {
 
         // sql query
         String insertCustomerQuery =
-                "INSERT INTO customer (id, full_name, address, id_type, registration_date, room_number, isCheckedIn) VALUES (?, ?, ?, ?, ?, ?, ?);";
+                "INSERT INTO \"eHotels\".customer (customer_id, full_name, address, id_type, reg_date, room_num, ischeckedin) VALUES (?, ?, ?, ?, ?, ?, ?);";
 
+        LocalDate currentDate = LocalDate.now();
+        java.sql.Date sqlDate = java.sql.Date.valueOf(currentDate);
         // try connect to database, catch any exceptions
         try {
             con = db.getConnection(); //get Connection
@@ -96,29 +102,28 @@ public class CustomerService {
             stmt.setString(2, customer.getFullname());
             stmt.setString(3, customer.getAddress());
             stmt.setString(4, customer.getId_type());
-            stmt.setString(5, customer.getRegistration_date());
+            stmt.setDate(5, sqlDate);
             stmt.setString(6, customer.getRoom_number());
-            stmt.setBoolean(7, customer.getCheckedIn());
+            stmt.setInt(7, customer.getCheckedIn());
 
             // execute the query
             int output = stmt.executeUpdate();
             System.out.println(output);
+            result = true;
 
             // close the statement
             stmt.close();
             // close the connection
             db.close();
         } catch (Exception e) {
-            message = "Error while inserting customer: " + e.getMessage();
+            throw new Exception(e.getMessage());
         } finally {
             if (con != null) // if connection is still open, then close.
                 con.close();
-            if (message.equals("")) message = "Customer added successfully!";
-
         }
 
         // return respective message
-        return message;
+        return result;
     }
 
     /**
@@ -135,7 +140,7 @@ public class CustomerService {
         Boolean result;
 
         // sql query
-        String sql = "UPDATE customer SET isCheckedIn=? WHERE id=?;";
+        String sql = "UPDATE \"eHotels\".customer SET ischeckedin=? WHERE customer_id=?;";
 
         // connection object
         ConnectionDB db = new ConnectionDB();
@@ -149,7 +154,7 @@ public class CustomerService {
             PreparedStatement stmt = con.prepareStatement(sql);
 
             // set every ? of statement
-            stmt.setBoolean(1, true);
+            stmt.setInt(1, 1);
             stmt.setInt(2, customer_id);
 
             // execute the query

@@ -1,5 +1,7 @@
 package com.ehotels;
 
+import java.time.LocalDate;
+import java.sql.*;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -17,7 +19,7 @@ public class BookingService {
     public List<Booking> getBookings() throws Exception {
 
         // sql query
-        String sql = "SELECT * FROM booking";
+        String sql = "SELECT * FROM \"eHotels\".booking";
         // connection object
         ConnectionDB db = new ConnectionDB();
 
@@ -36,9 +38,10 @@ public class BookingService {
             while (rs.next()) {
                 // create new booking object
                 Booking booking = new Booking(
-                        rs.getString("booking_ref"),
-                        rs.getInt("room_id"),
-                        rs.getInt("customer_id")
+                        rs.getInt("booking_id"),
+                        rs.getString("room_id"),
+                        rs.getInt("customer_id"),
+                        rs.getInt("room_num")
                 );
                 // append room in rooms list
                 bookings.add(booking);
@@ -66,8 +69,8 @@ public class BookingService {
      * @return string returned that states if the booking created or not
      * @throws Exception when trying to connect to database
      */
-    public String createBooking(Booking booking) throws Exception {
-        String message = "";
+    public Boolean createBooking(Booking booking) throws Exception {
+        Boolean result = false;
         Connection con = null;
 
         // connection object
@@ -75,9 +78,11 @@ public class BookingService {
         System.out.println(booking.getBooking_ref());
         System.out.println(booking.getRoom_id());
         System.out.println(booking.getCustomer_id());
+        LocalDate currentDate = LocalDate.now();
+        java.sql.Date sqlDate = java.sql.Date.valueOf(currentDate);
 
         // sql query
-        String insertBookingQuery = "INSERT INTO bookings (booking_id, room_id, customer_id) VALUES (?, ?, ?);";
+        String insertBookingQuery = "INSERT INTO \"eHotels\".booking (booking_id, customer_id, room_num, check_in_date, check_out_date, room_id) VALUES (?, ?, ?, ?, ?, ?);";
 
         // try connect to database, catch any exceptions
         try {
@@ -87,29 +92,32 @@ public class BookingService {
             PreparedStatement stmt = con.prepareStatement(insertBookingQuery);
 
             // set every ? of statement
-            stmt.setString(1, booking.getBooking_ref());
-            stmt.setInt(2, booking.getRoom_id());
-            stmt.setInt(3, booking.getCustomer_id());
+            stmt.setInt(1, booking.getBooking_ref());
+            stmt.setInt(2, booking.getCustomer_id());
+            stmt.setInt(3, booking.getRoom_number());
+            stmt.setDate(4, sqlDate);
+            stmt.setDate(5, null);
+            stmt.setString(6, booking.getRoom_id());
+
+
 
             // execute the query
             int output = stmt.executeUpdate();
             System.out.println(output);
-
+            result = true;
             // close the statement
             stmt.close();
             // close the connection
             db.close();
         } catch (Exception e) {
-            message = "Error while inserting customer: " + e.getMessage();
+            throw new Exception(e.getMessage());
         } finally {
             if (con != null) // if connection is still open, then close.
                 con.close();
-            if (message.equals("")) message = "Booking made successfully!";
-
         }
 
         // return respective message
-        return message;
+        return result;
     }
 
     /**
@@ -119,12 +127,12 @@ public class BookingService {
      * @return
      * @throws Exception
      */
-    public Boolean foundBooking(String booking_ref) throws Exception {
+    public Boolean foundBooking(Integer booking_ref) throws Exception {
 
         Boolean result = false;
 
         // sql query
-        String sql = "SELECT * FROM booking";
+        String sql = "SELECT * FROM \"eHotels\".booking";
         // connection object
         ConnectionDB db = new ConnectionDB();
 
@@ -138,7 +146,7 @@ public class BookingService {
 
             // iterate through the result set
             while (rs.next()) {
-                if (booking_ref==rs.getString("booking_ref")){
+                if (booking_ref==rs.getInt("booking_id")){
                     result = true;
                     break;
                 }
@@ -166,12 +174,12 @@ public class BookingService {
      * @return
      * @throws Exception
      */
-    public Integer getCustomerIdFromBooking(String booking_ref) throws Exception {
+    public Integer getCustomerIdFromBooking(Integer booking_ref) throws Exception {
 
         Integer cust_id = 0;
 
         // sql query
-        String sql = "SELECT * FROM booking";
+        String sql = "SELECT * FROM \"eHotels\".booking";
         // connection object
         ConnectionDB db = new ConnectionDB();
 
@@ -185,7 +193,7 @@ public class BookingService {
 
             // iterate through the result set
             while (rs.next()) {
-                if (booking_ref==rs.getString("booking_ref")){
+                if (booking_ref==rs.getInt("booking_id")){
                     cust_id = rs.getInt("customer_id");
                     break;
                 }

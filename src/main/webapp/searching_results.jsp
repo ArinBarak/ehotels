@@ -4,6 +4,7 @@
 <%@ page import="com.ehotels.RoomService" %>
 <%@ page import="com.ehotels.Room" %>
 <%@ page import="com.ehotels.Message" %>
+<%@ page import="com.ehotels.HotelService" %>
 <%@ page import="java.util.ArrayList" %>
 
 
@@ -12,7 +13,9 @@
        String capacity = request.getParameter("capacity");
        // get all available rooms from database
        RoomService roomService = new RoomService();
-       List<Rooms> rooms = null;
+       HotelService hotelservice = new HotelService();
+       List<Integer> test = hotelservice.getHotelsByLocation(location);
+       List<Room> rooms = new ArrayList<Room>();
        try {
            rooms = roomService.getSearchedRooms(location, capacity);
        } catch (Exception e) {
@@ -37,15 +40,18 @@
         %>
         <div>
             <p>Room ID: <%= room.getRoom_id() %></p>
-            <p>Hotel Name: <%= room.getHotel_name() %></p>
+            <p>Hotel Name: <%= hotelservice.getHotelNameById(room.getHotel_id()) %></p>
             <p>Capacity: <%= room.getCapacity() %></p>
-            <p>View: <%= room.getView() %></p>
+            <p>SeaView: <%= room.getSeaview() %></p>
+            <p>MountainView: <%= room.getMountview() %></p>
             <p>Room Number: <%= room.getRoom_number() %></p>
             <p>Amenities: <%= room.getAmenities() %></p>
+            <p>Damage: <%= room.getDamage() %></p>
+            <p>Extension: <%= room.getExtension() %></p>
             <p>Price: <%= room.getPrice() %></p>
             <form action="book-room-customer-info.jsp" method="post">
-                <input type="hidden" name="room_id" value="<%= room.getId() %>">
-                <input type="hidden" name="room_number" value="<% room.getRoom_number() %>">
+                <input type="hidden" name="room_id" value="<%= room.getRoom_id() %>">
+                <input type="hidden" name="room_number" value="<%= room.getRoom_number() %>">
                 <input type="submit" value="Book">
             </form>
         </div>

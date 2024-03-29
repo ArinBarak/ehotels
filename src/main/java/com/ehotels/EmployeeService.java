@@ -18,7 +18,7 @@ public class EmployeeService {
         Boolean result = false;
 
         // sql query
-        String sql = "SELECT * FROM employee";
+        String sql = "SELECT * FROM \"eHotels\".employee";
         // connection object
         ConnectionDB db = new ConnectionDB();
 

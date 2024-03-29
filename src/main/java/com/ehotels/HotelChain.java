@@ -1,7 +1,9 @@
 package com.ehotels;
 
 public class HotelChain{
-    private String chain_name; //key
+
+    private Integer chain_id;
+    private String chain_name;
     private String address_of_central;
     private Integer num_of_hotels;
     private String email;
@@ -11,21 +13,25 @@ public class HotelChain{
     /**
      * Constructor for Hotel Chain
      *
+     * @param chain_id
      * @param chain_name
      * @param address_of_central
      * @param num_of_hotels
      * @param email
      * @param phone_number
      */
-    public HotelChain(String chain_name, String address_of_central, Integer num_of_hotels, String email, String phone_number){
-     this.chain_name=chain_name;
-     this.address_of_central=address_of_central;
-     this.num_of_hotels=num_of_hotels;
-     this.email=email;
-     this.phone_number=phone_number;
+    public HotelChain(Integer chain_id, String chain_name, String address_of_central, Integer num_of_hotels, String email, String phone_number){
+        this.chain_id = chain_id;
+        this.chain_name=chain_name;
+        this.address_of_central=address_of_central;
+        this.num_of_hotels=num_of_hotels;
+        this.email=email;
+        this.phone_number=phone_number;
     }
 
     //setters
+
+    public void setChain_id(Integer chain_id) { this.chain_id = chain_id; }
     public void setChain_name(String chain_name) { this.chain_name = chain_name; }
     public void setAddress_of_central(String address_of_central) { this.address_of_central = address_of_central; }
     public void setNum_of_hotels(Integer num_of_hotels) { this.num_of_hotels = num_of_hotels; }
@@ -33,6 +39,8 @@ public class HotelChain{
     public void setPhone_number(String phone_number) { this.phone_number = phone_number; }
 
     //getters
+
+    public Integer getChain_id() { return chain_id; }
     public String getChain_name() { return chain_name; }
     public String getAddress_of_central() { return address_of_central; }
     public Integer getNum_of_hotels() { return num_of_hotels; }

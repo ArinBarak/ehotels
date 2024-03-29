@@ -3,23 +3,25 @@
 <%@ page import="java.util.List" %>
 <%@ page import="com.ehotels.Customer" %>
 <%@ page import="com.ehotels.CustomerService" %>
+<%@ page import="com.ehotels.BookingService" %>
 
 <%@ page import="com.ehotels.Message" %>
 <%@ page import="java.util.ArrayList" %>
 
 <%
     String booking_ref = request.getParameter("booking_reference");
+    Integer b_id = Integer.parseInt(booking_ref);
     BookingService bookingservice = new BookingService();
     CustomerService customerservice = new CustomerService();
-    Boolean isAnExistingBooking;
+    Boolean isAnExistingBooking = false;
 
     try {
-        isAnExistingBooking = bookingservice.foundBooking(booking_ref);
+        isAnExistingBooking = bookingservice.foundBooking(b_id);
     } catch (Exception e) {
         e.printStackTrace();
     }
     if (isAnExistingBooking){
-        Integer c_id = bookingservice.getCustomerIdFromBooking(booking_ref);
+        Integer c_id = bookingservice.getCustomerIdFromBooking(b_id);
         Boolean checkingIn = customerservice.checkInCustomer(c_id);
         response.sendRedirect("success.jsp");
     }

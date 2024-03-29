@@ -1,6 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 
 <%-- this is the main page of ehotels --%>
+<%@ page import="java.util.List" %>
+<%@ page import="com.ehotels.RoomService" %>
+<%@ page import="com.ehotels.HotelService" %>
+<%@ page import="com.ehotels.Room" %>
+<%@ page import="java.util.ArrayList" %>
 
 <html lang="en">
 <head>
@@ -59,6 +64,5 @@
             </ul>
             </nav>
     </header>
-
 </body>
 </html>
