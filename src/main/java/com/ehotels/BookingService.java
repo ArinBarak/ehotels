@@ -11,10 +11,10 @@ import java.util.List;
 public class BookingService {
 
     /**
-     * Method to get all bookings from database
+     * Method for getting all bookings
      *
-     * @return list of all available rooms found in database
-     * @throws Exception when trying to connect to database
+     * @return
+     * @throws Exception
      */
     public List<Booking> getBookings() throws Exception {
 
@@ -57,17 +57,16 @@ public class BookingService {
             // return result
             return bookings;
         } catch (Exception e) {
-            throw new Exception(e.getMessage());
+            throw new Exception();
         }
     }
 
 
     /**
-     * Method to create a booking and insert a booking into the database
-     *
-     * @param booking booking to be created
-     * @return string returned that states if the booking created or not
-     * @throws Exception when trying to connect to database
+     * Method for inserting a booking into the database
+     * @param booking
+     * @return
+     * @throws Exception
      */
     public Boolean createBooking(Booking booking) throws Exception {
         Boolean result = false;
@@ -110,7 +109,7 @@ public class BookingService {
             // close the connection
             db.close();
         } catch (Exception e) {
-            throw new Exception(e.getMessage());
+            throw new Exception();
         } finally {
             if (con != null) // if connection is still open, then close.
                 con.close();
@@ -121,8 +120,7 @@ public class BookingService {
     }
 
     /**
-     * Method for employees to check if the booking reference is an attribute of an existing booking
-     *
+     * Method for checking if the booking exists
      * @param booking_ref
      * @return
      * @throws Exception
@@ -163,7 +161,7 @@ public class BookingService {
             // return result
             return result;
         } catch (Exception e) {
-            throw new Exception(e.getMessage());
+            throw new Exception();
         }
     }
 
@@ -210,7 +208,7 @@ public class BookingService {
             // return result
             return cust_id;
         } catch (Exception e) {
-            throw new Exception(e.getMessage());
+            throw new Exception();
         }
     }
 }

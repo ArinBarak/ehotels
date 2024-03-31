@@ -7,8 +7,7 @@ import java.sql.ResultSet;
 public class EmployeeService {
 
     /**
-     *Method to check if the employee id appears in employee table
-     *
+     * Method for checking if entered ID is an ID of an existing employee
      * @param e_id
      * @return
      * @throws Exception
@@ -38,7 +37,6 @@ public class EmployeeService {
                 }
             }
 
-
             // close result set
             rs.close();
             // close statement
@@ -49,7 +47,7 @@ public class EmployeeService {
             // return result
             return result;
         } catch (Exception e) {
-            throw new Exception(e.getMessage());
+            throw new Exception();
         }
     }
 }

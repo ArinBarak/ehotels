@@ -10,11 +10,12 @@ public class Booking {
     private String check_out_date;
 
     /**
-     * Constructor for Bookings
+     * Constructor for Booking
      *
-     * @param booking_ref booking reference number
-     * @param room_id booked room's id
-     * @param customer_id id of the customer
+     * @param booking_ref
+     * @param room_id
+     * @param customer_id
+     * @param room_number
      */
     public Booking(Integer booking_ref, String room_id, Integer customer_id, Integer room_number){
         this.booking_ref=booking_ref;

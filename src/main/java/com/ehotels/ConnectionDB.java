@@ -31,8 +31,7 @@ public class ConnectionDB {
             return con;
         } catch (Exception e) {
 
-            throw new Exception("Could not establish connection with the Database Server: "
-                    + e.getMessage());
+            throw new Exception();
         }
 
     }
@@ -48,8 +47,7 @@ public class ConnectionDB {
             if (con != null)
                 con.close();
         } catch (SQLException e) {
-            throw new SQLException("Could not close connection with the Database Server: "
-                    + e.getMessage());
+            throw new SQLException();
         }
 
     }

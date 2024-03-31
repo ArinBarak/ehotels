@@ -1,3 +1,7 @@
+<!DOCTYPE html>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+
+<%-- this page shows the hotel chains contact informations --%>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -9,40 +13,6 @@
            font-family: Arial, sans-serif;
        }
 
-       /* Navbar styles */
-       #navbar {
-           background-color: #031d59; /* Dark background color */
-           overflow: hidden;
-       }
-
-       #navbar h1{
-           margin-left: 50px;
-           color: white;
-           font-size: xx-large;
-       }
-       #navbar ul {
-           list-style-type: none; /* Remove bullets */
-           margin: 0;
-           padding: 0;
-           display: flex;
-       }
-
-       #navbar li {
-           flex: 1;
-           text-align: center;
-       }
-
-       #navbar li a {
-           display: block;
-           color: rgb(170, 197, 255);
-           padding: 35px 10px; /* Adjust padding as needed */
-           text-decoration: none;
-       }
-
-       #navbar li a:hover {
-           background-color: #555; /* Darker background color on hover */
-       }
-
        #hotels {
            display: flex;
            flex-wrap: wrap;
@@ -51,7 +21,7 @@
        }
 
        .hotel {
-           width: 45%; /* Adjust width as needed */
+           width: 45%;
            margin: 10px;
            padding: 20px;
            border: 2px solid #031d59;
@@ -66,18 +36,12 @@
        .hotel p {
            margin: 10px 0px;
        }
+
+
 </style>
 <body>
 <header>
-    <nav id="navbar">
-        <ul>
-            <h1> EHotels</h1>
-            <li><a href="main.jsp">Home</a></li>
-            <li><a href="searching.jsp">Book</a></li>
-            <li><a href="#contact.html">Contact</a></li>
-            <li><a href="employee-login.jsp">Employee Login</a></li>
-        </ul>
-    </nav>
+    <jsp:include page="navbar.jsp"/>
 </header>
 <section id="hotels">
     <div class="hotel">

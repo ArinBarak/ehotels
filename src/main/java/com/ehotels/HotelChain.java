@@ -12,7 +12,6 @@ public class HotelChain{
 
     /**
      * Constructor for Hotel Chain
-     *
      * @param chain_id
      * @param chain_name
      * @param address_of_central
@@ -30,7 +29,6 @@ public class HotelChain{
     }
 
     //setters
-
     public void setChain_id(Integer chain_id) { this.chain_id = chain_id; }
     public void setChain_name(String chain_name) { this.chain_name = chain_name; }
     public void setAddress_of_central(String address_of_central) { this.address_of_central = address_of_central; }
@@ -39,7 +37,6 @@ public class HotelChain{
     public void setPhone_number(String phone_number) { this.phone_number = phone_number; }
 
     //getters
-
     public Integer getChain_id() { return chain_id; }
     public String getChain_name() { return chain_name; }
     public String getAddress_of_central() { return address_of_central; }

@@ -15,13 +15,15 @@ public class Hotel {
 
     /**
      * Constructor for Hotel
-     *
      * @param hotel_id
      * @param chain_name
+     * @param city
      * @param num_of_rooms
      * @param email
      * @param phone_number
      * @param rating
+     * @param hotel_name
+     * @param address
      */
     public Hotel(Integer hotel_id, String chain_name, String city, Integer num_of_rooms,
                  String email, String phone_number, Integer rating, String hotel_name, String address){

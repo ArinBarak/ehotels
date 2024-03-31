@@ -5,19 +5,15 @@ public class Employee {
     private Integer employee_id;
     private String full_name;
     private String address;
-    //private String role_title;
-    //private Integer role_salary;
     private String ssn_sin;
     private String hotel_id;
 
     /**
-     * Constructor for Employee
-     *
+     * Constructor for employee
      * @param employee_id
      * @param full_name
      * @param address
-     * @param// role_title
-     * @param //role_salary
+     * @param ssn_sin
      * @param hotel_id
      */
     public Employee(Integer employee_id, String full_name, String address,

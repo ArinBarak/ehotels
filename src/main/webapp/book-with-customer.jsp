@@ -9,6 +9,10 @@
 <%@ page import="com.ehotels.Message" %>
 <%@ page import="java.util.ArrayList" %>
 
+<%-- this page is the final page for booking action --%>
+<%-- if the booking is successful, it show the booking information to the customer --%>
+<%-- if it is unsuccessful, it directs customer to "not-found.jsp" page --%>
+
 <%
     //get values
     Boolean done= false;
@@ -21,6 +25,7 @@
     String id_type = request.getParameter("id_type");
     String room_id = request.getParameter("room_id");
     String room_number = request.getParameter("room_number");
+    String hotel_name = request.getParameter("hotel_name");
 
     BookingService bookingservice = new BookingService();
     RoomService roomservice = new RoomService();
@@ -31,20 +36,77 @@
     Integer booking_ref = Integer.valueOf(reference);
     Integer r_num = Integer.parseInt(room_number);
     Booking booking = new Booking(booking_ref, room_id, customer_id, r_num);
-    done = customerservice.createCustomer(customer);
-    done1 = roomservice.bookRoom(room_id);
-    done2= bookingservice.createBooking(booking);
 
-    /*try{
-        null;
-    }catch (Exception e) {
-             e.printStackTrace();
-    }*/
 
-    if(done2){
-        response.sendRedirect("success.jsp");
-    }else{
-        response.sendRedirect("not-found.jsp");
-    }
+        done = customerservice.createCustomer(customer);
+        done1 = roomservice.bookRoom(room_id);
+        done2= bookingservice.createBooking(booking);
 
 %>
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>EHotels | Success</title>
+    <style>
+        .centered-container {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .rounded-box {
+            background-color: #f0f0f0;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+            width: 300px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .room-info {
+            text-align: center;
+        }
+
+        .info-item {
+            margin-bottom: 10px;
+        }
+    </style>
+
+</head>
+
+<body>
+    <jsp:include page="navbar.jsp"/>
+    <%
+        if(done && done1 && done2){
+    %>
+    <div class="centered-container">
+        <div class="rounded-box">
+            <div class="room-info">
+                <div class="info-item">
+                    <p>Success!</p>
+                </div>
+                <div class="info-item">
+                    <p>Booking Reference: <%=booking_ref%></p>
+                </div>
+                <div class="info-item">
+                    <p>Booked with <%= hotel_name %></p>
+                </div>
+                <div class="info-item">
+                    <p>Room #<%= room_number%></p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <%
+    }else{
+       response.sendRedirect("not-found.jsp");
+    }
+    %>
+</body>
+
+</html>

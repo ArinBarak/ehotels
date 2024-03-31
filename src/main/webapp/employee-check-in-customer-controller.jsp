@@ -4,9 +4,12 @@
 <%@ page import="com.ehotels.Customer" %>
 <%@ page import="com.ehotels.CustomerService" %>
 <%@ page import="com.ehotels.BookingService" %>
-
 <%@ page import="com.ehotels.Message" %>
 <%@ page import="java.util.ArrayList" %>
+
+<%-- this is the final action page for checking in a customer --%>
+<%-- if successful, it redirects to "success.jsp" page --%>
+<%-- if not, it redirects to "not-found.jsp" page --%>
 
 <%
     String booking_ref = request.getParameter("booking_reference");

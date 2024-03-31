@@ -11,10 +11,9 @@ import java.util.List;
 public class CustomerService {
 
     /**
-     * Method to get all customers from database
-     *
-     * @return list of all available customers found in database
-     * @throws Exception when trying to connect to database
+     * Method for getting all customers
+     * @return
+     * @throws Exception
      */
     public List<Customer> getCustomers() throws Exception {
 
@@ -63,13 +62,12 @@ public class CustomerService {
             // return result
             return customers;
         } catch (Exception e) {
-            throw new Exception(e.getMessage());
+            throw new Exception();
         }
     }
 
     /**
-     * Method for inserting a customer to database
-     *
+     * Method for inserting customer into the database
      * @param customer
      * @return
      * @throws Exception
@@ -116,7 +114,7 @@ public class CustomerService {
             // close the connection
             db.close();
         } catch (Exception e) {
-            throw new Exception(e.getMessage());
+            throw new Exception();
         } finally {
             if (con != null) // if connection is still open, then close.
                 con.close();
@@ -127,15 +125,13 @@ public class CustomerService {
     }
 
     /**
-     * Method to check in a customer (only employees will use this function)
-     *
+     * Method for checking in a customer
      * @param customer_id
      * @return
      * @throws Exception
      */
     public Boolean checkInCustomer(Integer customer_id) throws Exception {
         Connection con = null;
-        String message = "";
 
         Boolean result;
 
@@ -166,14 +162,9 @@ public class CustomerService {
 
         } catch (Exception e) {
             result = false;
-            message = "Error while updating student: " + e.getMessage();
 
         } finally {
             if (con != null) con.close();
-            if (message.equals("")) {
-                result = true;
-                message = "Customer checked in successfully!";
-            }
         }
 
         // return respective message

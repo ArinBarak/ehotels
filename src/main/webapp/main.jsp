@@ -1,11 +1,7 @@
+<!DOCTYPE html>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 
 <%-- this is the main page of ehotels --%>
-<%@ page import="java.util.List" %>
-<%@ page import="com.ehotels.RoomService" %>
-<%@ page import="com.ehotels.HotelService" %>
-<%@ page import="com.ehotels.Room" %>
-<%@ page import="java.util.ArrayList" %>
 
 <html lang="en">
 <head>
@@ -17,52 +13,53 @@
             margin: 0;
             font-family: Arial, sans-serif;
         }
+       .centered-container {
+           position: absolute;
+           top: 50%;
+           left: 50%;
+           transform: translate(-50%, -50%);
+           display: flex;
+           flex-direction: column;
+           align-items: center;
+       }
 
-        /* Navbar styles */
-        #navbar {
-            background-color: #031d59; /* Dark background color */
-            overflow: hidden;
-        }
+       .rounded-box {
+           background-color: #f0f0f0;
+           border-radius: 10px;
+           padding: 20px;
+           margin-bottom: 20px;
+           width: 500px;
+           box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+       }
 
-        #navbar h1{
-            margin-left: 50px;
-            color: white;
-            font-size: xx-large;
-        }
-        #navbar ul {
-            list-style-type: none; /* Remove bullets */
-            margin: 0;
-            padding: 0;
-            display: flex;
-        }
+       .room-info {
+           text-align: center;
+       }
 
-        #navbar li {
-            flex: 1;
-            text-align: center;
-        }
+       .info-item {
+           margin-bottom: 10px;
+       }
 
-        #navbar li a {
-            display: block;
-            color: rgb(170, 197, 255);
-            padding: 35px 10px; /* Adjust padding as needed */
-            text-decoration: none;
-        }
-
-        #navbar li a:hover {
-            background-color: #555; /* Darker background color on hover */
-        }
     </style>
 <body>
-    <header>
-        <nav id="navbar">
-            <ul>
-            <h1> EHotels</h1>
-            <li><a href="main.jsp">Home</a></li>
-            <li><a href="searching.jsp">Book</a></li>
-            <li><a href="contact.html">Contact</a></li>
-            <li><a href="employee.jsp">Employee Login</a></li>
-            </ul>
-            </nav>
-    </header>
+    <jsp:include page="navbar.jsp"/>
+    <div class="centered-container">
+        <div class="rounded-box">
+            <div class="room-info">
+                <div class="info-item">
+                    <p>Welcome to EHotels!</p>
+                </div>
+                <div class="info-item">
+                    <p>To book a room, please go to the booking page.</p>
+                </div>
+                <div class="info-item">
+                    <p>To get contact informations of Hotel Chains, please go to the contact page.</p>
+                </div>
+                <div class="info-item">
+                    <p>If you are an employee please log in.</p>
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
 </html>

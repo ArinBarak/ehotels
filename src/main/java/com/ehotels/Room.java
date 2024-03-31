@@ -17,8 +17,7 @@ public class Room {
     private String address;
 
     /**
-     * Constructor for Room
-     *
+     * Constructor for room
      * @param room_id
      * @param room_number
      * @param hotel_id
@@ -26,8 +25,11 @@ public class Room {
      * @param capacity
      * @param amenities
      * @param damage
+     * @param seaview
+     * @param mountview
      * @param extension
      * @param isbooked
+     * @param address
      */
     public Room(String room_id, Integer room_number,Integer hotel_id, String price, String capacity,
                 String amenities, String damage, Boolean seaview, Boolean mountview, Boolean extension, Boolean isbooked,

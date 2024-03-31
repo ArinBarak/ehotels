@@ -14,8 +14,7 @@ public class Customer {
     private Integer isCheckedIn; // 0 if not checked in, 1 if ischeckedin
 
     /**
-     * Constructor
-     *
+     * Constructor for Customer
      * @param id
      * @param fullname
      * @param address

@@ -10,8 +10,7 @@ import java.sql.SQLException;
 public class HotelService {
 
     /**
-     * Method to get hotels by location
-     *
+     * Method to get hotels filtered by entered location(city)
      * @param location
      * @return
      * @throws Exception
@@ -52,7 +51,7 @@ public class HotelService {
             // return result
             return hotels;
         } catch (Exception e) {
-            throw new Exception(e.getMessage());
+            throw new Exception();
         }
     }
 
@@ -86,9 +85,7 @@ public class HotelService {
                     }
                 }
                 catch (SQLException e) {
-                    // Handle any SQLExceptions that occur while retrieving data from the ResultSet
-                    // Print error message or log it for debugging
-                    System.err.println("Error while processing ResultSet: " + e.getMessage());
+                    throw new SQLException();
                 }
             }
 
@@ -100,7 +97,7 @@ public class HotelService {
             db.close();
             return null;
         } catch (Exception e) {
-            throw new Exception(e.getMessage());
+            throw new Exception();
         }
     }
 }

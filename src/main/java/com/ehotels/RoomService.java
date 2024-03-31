@@ -10,8 +10,7 @@ import java.sql.SQLException;
 public class RoomService {
 
     /**
-     * Method to get all available rooms
-     *
+     * Method for getting all non-booked (available) rooms
      * @return
      * @throws Exception
      */
@@ -36,7 +35,6 @@ public class RoomService {
             // iterate through the result set
             while (rs.next()) {
                 // create new room object
-                //if(!rs.getBoolean("isbooked")) {
                     try {
                         Room room = new Room(
                                 rs.getString("room_id"),
@@ -56,9 +54,7 @@ public class RoomService {
                         rooms.add(room);
                     }
                     catch (SQLException e) {
-                        // Handle any SQLExceptions that occur while retrieving data from the ResultSet
-                        // Print error message or log it for debugging
-                        System.err.println("Error while processing ResultSet: " + e.getMessage());
+                        throw  new SQLException();
                     }
                 //}
             }
@@ -72,13 +68,14 @@ public class RoomService {
             // return result
             return rooms;
         } catch (Exception e) {
-            throw new Exception(e.getMessage());
+            throw new Exception(;
         }
     }
 
     /**
-     * method to get rooms by search
+     * Method for getting all non-booked rooms filtered by the entered location(city) and capacity
      * @param location
+     * @param capacity
      * @return
      * @throws Exception
      */
@@ -92,6 +89,7 @@ public class RoomService {
         // data structure to keep all searched rooms retrieved from database
         List<Room> rooms = new ArrayList<Room>();
         HotelService hs = new HotelService();
+        //creating a list to have hotels in the entered location
         List<Integer> hotelsInLoc = hs.getHotelsByLocation(location);
 
         // try connect to database, catch any exceptions
@@ -105,31 +103,25 @@ public class RoomService {
 
             // iterate through the result set
             while (rs.next()) {
-                //try {
-                    if (hotelsInLoc.contains(rs.getInt("hotel_id"))) {
-
-                        Room room = new Room(
-                                rs.getString("room_id"),
-                                rs.getInt("room_num"),
-                                rs.getInt("hotel_id"),
-                                rs.getBigDecimal("price").toString(),
-                                rs.getString("capacity"),
-                                rs.getString("amenities"),
-                                rs.getString("damage"),
-                                rs.getBoolean("sea_view"),
-                                rs.getBoolean("mount_view"),
-                                rs.getBoolean("extension"),
-                                rs.getBoolean("isbooked"),
-                                rs.getString("address")
+                //checking if the room is in the desired location
+                if (hotelsInLoc.contains(rs.getInt("hotel_id"))) {
+                    Room room = new Room(
+                            rs.getString("room_id"),
+                            rs.getInt("room_num"),
+                            rs.getInt("hotel_id"),
+                            rs.getBigDecimal("price").toString(),
+                            rs.getString("capacity"),
+                            rs.getString("amenities"),
+                            rs.getString("damage"),
+                            rs.getBoolean("sea_view"),
+                            rs.getBoolean("mount_view"),
+                            rs.getBoolean("extension"),
+                            rs.getBoolean("isbooked"),
+                            rs.getString("address")
                         );
                         // append room in rooms list
                         rooms.add(room);
                     }
-                //} catch (SQLException e) {
-                    // Handle any SQLExceptions that occur while retrieving data from the ResultSet
-                    // Print error message or log it for debugging
-                //    System.err.println("Error while processing ResultSet: " + e.getMessage());
-                //}
             }
 
             // close result set
@@ -142,13 +134,12 @@ public class RoomService {
             // return result
             return rooms;
         } catch (Exception e) {
-            throw new Exception(e.getMessage());
+            throw new Exception();
         }
     }
 
     /**
-     * Method for booking the room by updating the "isbooked" variable of the room
-     *
+     * Method for booking a room
      * @param room_id
      * @return
      * @throws Exception
@@ -183,7 +174,7 @@ public class RoomService {
             stmt.close();
 
         } catch (Exception e) {
-            throw new Exception(e.getMessage());
+            throw new Exception();
         } finally {
             if (con != null) con.close();
         }
