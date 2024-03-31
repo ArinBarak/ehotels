@@ -6,7 +6,6 @@
 <%@ page import="com.ehotels.Booking" %>
 <%@ page import="com.ehotels.BookingService" %>
 <%@ page import="com.ehotels.RoomService" %>
-<%@ page import="com.ehotels.Message" %>
 <%@ page import="java.util.ArrayList" %>
 
 <%-- this page is the final page for booking action --%>
@@ -38,9 +37,9 @@
     Booking booking = new Booking(booking_ref, room_id, customer_id, r_num);
 
 
-        done = customerservice.createCustomer(customer);
-        done1 = roomservice.bookRoom(room_id);
-        done2= bookingservice.createBooking(booking);
+    done = customerservice.createCustomer(customer);
+    done1 = roomservice.bookRoom(room_id);
+    done2= bookingservice.createBooking(booking);
 
 %>
 

@@ -3,7 +3,6 @@
 <%@ page import="java.util.List" %>
 <%@ page import="com.ehotels.RoomService" %>
 <%@ page import="com.ehotels.Room" %>
-<%@ page import="com.ehotels.Message" %>
 <%@ page import="java.util.ArrayList" %>
 
 <%-- this the searching/book page --%>

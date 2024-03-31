@@ -3,10 +3,9 @@
 <%@ page import="java.util.List" %>
 <%@ page import="com.ehotels.Employee" %>
 <%@ page import="com.ehotels.EmployeeService" %>
-<%@ page import="com.ehotels.Message" %>
 <%@ page import="java.util.ArrayList" %>
 
-<%-- this is a oage to check if the employee exists --%>
+<%-- this is a page to check if the employee exists --%>
 <%-- if true, it redirects to "employee-check-in-customer.jsp" page --%>
 <%-- if false, it redirects to "not-found.jsp" page --%>
 

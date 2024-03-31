@@ -4,7 +4,6 @@
 <%@ page import="com.ehotels.Customer" %>
 <%@ page import="com.ehotels.CustomerService" %>
 <%@ page import="com.ehotels.BookingService" %>
-<%@ page import="com.ehotels.Message" %>
 <%@ page import="java.util.ArrayList" %>
 
 <%-- this is the final action page for checking in a customer --%>

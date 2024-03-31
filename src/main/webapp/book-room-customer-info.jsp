@@ -3,7 +3,6 @@
 <%@ page import="java.util.List" %>
 <%@ page import="com.ehotels.CustomerService" %>
 <%@ page import="com.ehotels.Customer" %>
-<%@ page import="com.ehotels.Message" %>
 <%@ page import="java.util.ArrayList" %>
 
 <%-- this is the page where enters their information after they have choose the room they want to book --%>

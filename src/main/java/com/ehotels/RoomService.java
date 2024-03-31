@@ -68,7 +68,7 @@ public class RoomService {
             // return result
             return rooms;
         } catch (Exception e) {
-            throw new Exception(;
+            throw new Exception();
         }
     }
 
